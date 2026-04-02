@@ -10,9 +10,9 @@ mkdir -p "$temp_dir/result"
 tmux -f /dev/null -S "$temp_dir/tmux" new-session -dPF "#{session_name}" \
     fish --private -i -C "\
         source $root/../functions/fish_bind_count.fish; \
-        source $root/../functions/fish_helix_command.fish; \
+        source $root/../functions/fish_meow_command.fish; \
         source $root/../functions/fish_default_mode_prompt.fish; \
-        source $root/../functions/fish_helix_key_bindings.fish; \
+        source $root/../functions/fish_meow_key_bindings.fish; \
         source $root/_init.fish $temp_dir; \
         source $test_file; \
         source $root/_done.fish; \

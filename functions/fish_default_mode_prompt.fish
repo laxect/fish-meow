@@ -1,7 +1,7 @@
-function fish_default_mode_prompt --description "Display vi/helix prompt mode"
+function fish_default_mode_prompt --description "Display vi/meow prompt mode"
     # Do nothing if not in vi mode
     if test "$fish_key_bindings" = fish_vi_key_bindings
-        or test "$fish_key_bindings" = fish_helix_key_bindings
+        or test "$fish_key_bindings" = fish_meow_key_bindings
         or test "$fish_key_bindings" = fish_hybrid_key_bindings
         switch $fish_bind_mode
             case default

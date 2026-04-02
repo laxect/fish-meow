@@ -19,32 +19,32 @@ function check
     set expected "$q_expected[$check_index]"
     test -n "$broken" && touch "$temp_dir/broken"
     switch $property
-    case mode
-        set caption "Bind mode:        "
-        set value "$fish_bind_mode"
-    case line
-        set caption "Cursor line:      "
-        set value "$(commandline --line)"
-    case cursor
-        set caption "Cursor position:  "
-        set value "$(commandline --cursor)"
-    case buffer
-        set caption "Buffer content:   "
-        commandline | sed -z 's/\\n$//' | read -lz buffer
-        set value "$buffer"
-    case selection
-        set caption "Selection content:"
-        commandline --current-selection | sed -z 's/\\n$//' | read -lz selection
-        set value "$selection"
+        case mode
+            set caption "Bind mode:        "
+            set value "$fish_bind_mode"
+        case line
+            set caption "Cursor line:      "
+            set value "$(commandline --line)"
+        case cursor
+            set caption "Cursor position:  "
+            set value "$(commandline --cursor)"
+        case buffer
+            set caption "Buffer content:   "
+            commandline | sed -z 's/\\n$//' | read -lz buffer
+            set value "$buffer"
+        case selection
+            set caption "Selection content:"
+            commandline --current-selection | sed -z 's/\\n$//' | read -lz selection
+            set value "$selection"
     end
     if test _"$value" != _"$expected"
-        echo "$caption $(string escape -- "$value") ($(string escape -- "$expected") expected)" >> "$temp_dir/out"
+        echo "$caption $(string escape -- "$value") ($(string escape -- "$expected") expected)" >>"$temp_dir/out"
         test -z $broken && touch "$temp_dir/failure"
     else if test -n $broken
-        echo "$caption $(string escape -- "$value") (broken value fixed)" >> "$temp_dir/out"
+        echo "$caption $(string escape -- "$value") (broken value fixed)" >>"$temp_dir/out"
         touch "$temp_dir/fixed"
     else
-        echo "$caption $(string escape -- "$value")" >> "$temp_dir/out"
+        echo "$caption $(string escape -- "$value")" >>"$temp_dir/out"
     end
 end
 
@@ -88,17 +88,17 @@ end
 function _input
     for sequence in $argv
         switch "$sequence"
-        case "Normal"
-            $tmux send-keys F11
-        case "Line"
-            $tmux send-keys F11 o
-        case '*'
-            $tmux send-keys -- "$sequence"
+            case Normal
+                $tmux send-keys F11
+            case Line
+                $tmux send-keys F11 A
+            case '*'
+                $tmux send-keys -- "$sequence"
         end
     end
 end
 
-set -g fish_key_bindings fish_helix_key_bindings
+set -g fish_key_bindings fish_meow_key_bindings
 bind --user --erase --all
 for mode in default visual insert
     bind --user -M $mode -k f12 validate

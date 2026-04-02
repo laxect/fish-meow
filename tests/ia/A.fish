@@ -1,2 +1,3 @@
-_input "asdf" Normal ggAq
-_buffer "asdfq"
+_input asdf Normal ggAq
+_buffer "asdf
+q"
