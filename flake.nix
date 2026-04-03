@@ -30,7 +30,12 @@
       ];
 
       perSystem =
-        { config, pkgs, ... }:
+        {
+          self',
+          config,
+          pkgs,
+          ...
+        }:
         {
           packages = {
             fish-meow = pkgs.fishPlugins.buildFishPlugin {
@@ -44,7 +49,10 @@
                 platforms = pkgs.lib.platforms.unix;
               };
             };
-            default = config.packages.fish-meow;
+            default = self'.packages.fish-meow;
+            testShell = pkgs.wrapFish {
+              pluginPkgs = [ self'.packages.fish-meow ];
+            };
           };
 
           checks = {
